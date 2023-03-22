@@ -1,7 +1,8 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
 
-import fetchCountries from '../src/fetchCountries';
+import fetchCountries from './js/fetchCountries';
+//import messageOver from './js/message';
 
 var debounce = require('lodash.debounce');
 
@@ -11,7 +12,7 @@ const messageOver =
 
 const inFieldSearch = document.querySelector('input#search-box');
 const countryList = document.querySelector('.country-list');
-const CountryInfo = document.querySelector('.country-info');
+const countryInfo = document.querySelector('.country-info');
 
 inFieldSearch.addEventListener(
   'input',
@@ -22,19 +23,11 @@ inFieldSearch.addEventListener(
 );
 
 function checkInput(name) {
+  clearMarkup();
   if (name !== '') {
-    //fetchCountries(name).then(data => checkAmountLands(data));
     fetchCountries(name).then(data => {
       checkAmountLands(data);
-
-      //data.length ? checkAmountLands(data) : console.log('ERROR');
-
-      //   if (data.hasOwnProperty('length')) {
-      //     checkAmountLands(data);
-      //   }
     });
-  } else {
-    clearMarkup();
   }
 }
 
@@ -49,41 +42,59 @@ function checkAmountLands(data) {
 }
 
 function markupCountryList(data) {
-  //const dog = JSON.parse(data);
-  console.log(data.length);
-  console.log('Create markup CountryList!!!');
   countryList.append(...itemsCountryList(data));
 }
-//
 
 const itemsCountryList = data => {
   return data.map(item => {
     const newItem = document.createElement('li');
-    // const liContent = item.name.official;
-    //  newItem.classList.add(flags)
-    newItem.style.listStyleImage = item.flags.svg;
-    newItem.textContent = item.name.official;
+    const newImg = document.createElement('img');
+    const newH = document.createElement('h4');
+    newItem.append(newImg, newH);
+
+    newItem.classList.add('country-item');
+    newImg.src = item.flags.svg;
+    newImg.alt = item.name.official;
+    newImg.width = '50';
+    newItem.value = item.name.official;
+    newH.textContent = item.name.official;
     console.log(newItem);
     return newItem;
   });
 };
 
 function markupCountryInfo(data) {
-  console.log('Create markup CountryInfo!!!');
+  countryInfo.append(...itemCountryInfo(data));
 }
+
+const itemCountryInfo = data => {
+  return data.map(item => {
+    const contentDIV = document.createElement('ul');
+    const newItem = document.createElement('li');
+    const newImg = document.createElement('img');
+    const newH = document.createElement('h3');
+    newItem.append(newImg, newH);
+    newItem.classList.add('country-item');
+    newImg.src = item.flags.svg;
+    newImg.alt = item.name.official;
+    newImg.width = '50';
+    newItem.value = item.name.official;
+    newH.textContent = item.name.official;
+
+    const itemCapital = document.createElement('li');
+    const itemPopulation = document.createElement('li');
+    const itemLanguages = document.createElement('li');
+
+    itemCapital.textContent = `Capital : ${item.capital}`;
+    itemPopulation.textContent = `Population : ${item.population}`;
+    itemLanguages.textContent = 'Languages : ' + Object.values(item.languages);
+
+    contentDIV.append(newItem, itemCapital, itemPopulation, itemLanguages);
+    return contentDIV;
+  });
+};
 
 function clearMarkup() {
-  console.log('Clear markup!!!');
+  countryList.innerHTML = '';
+  countryInfo.innerHTML = '';
 }
-// const listIngredients = document.querySelector('#ingredients');
-
-// const itemsFromIngredients = ingredients => {
-//   return ingredients.map(ingredient => {
-//     const newItem = document.createElement('li');
-//     newItem.textContent = ingredient;
-//     newItem.classList.add('item');
-//     return newItem;
-//   });
-// };
-
-// listIngredients.append(...itemsFromIngredients(ingredients));
