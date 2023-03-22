@@ -81,15 +81,21 @@ const itemCountryInfo = data => {
     newItem.value = item.name.official;
     newH.textContent = item.name.official;
 
+    newItem.classList.add('countryItemSize');
+    newImg.width = '100';
+
     const itemCapital = document.createElement('li');
     const itemPopulation = document.createElement('li');
     const itemLanguages = document.createElement('li');
 
-    itemCapital.textContent = `Capital : ${item.capital}`;
-    itemPopulation.textContent = `Population : ${item.population}`;
-    itemLanguages.textContent = 'Languages : ' + Object.values(item.languages);
+    const languages = Object.values(item.languages);
+
+    itemCapital.innerHTML = `<span class="nameItem">Capital :</span> <span class="contentItem">${item.capital}</span> `;
+    itemPopulation.innerHTML = `<span class="nameItem">Population :</span> <span class="contentItem">${item.population}</span> `;
+    itemLanguages.innerHTML = `<span class="nameItem">Languages :</span> <span class="contentItem">${languages}</span> `;
 
     contentDIV.append(newItem, itemCapital, itemPopulation, itemLanguages);
+
     return contentDIV;
   });
 };
