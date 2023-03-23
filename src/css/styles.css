@@ -38,9 +38,13 @@ img {
   margin-right: 30px;
 }
 
-/* img.countryItemSize {
-  width: 80;
-} */
+img {
+  width: 50px;
+}
+
+.countryItemSize img {
+  width: 100px;
+}
 
 ul {
   padding-left: 0;
