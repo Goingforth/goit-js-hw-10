@@ -1,4 +1,5 @@
 import './css/styles.css';
+import './css/task01.css';
 import Notiflix from 'notiflix';
 
 import fetchCountries from './js/fetchCountries';
@@ -6,11 +7,10 @@ import markupLineCountry from './js/markupLineCountry';
 import itemCountryInfo from './js/itemCountryInfo';
 import clearMarkup from './js/clearMarkup';
 
+import { messageOver } from './js/message';
+
 var debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
-
-const messageOver =
-  'Too many matches found. Please enter a more specific name.';
 
 const inFieldSearch = document.querySelector('input#search-box');
 const countryList = document.querySelector('.country-list');
@@ -34,7 +34,7 @@ function checkInput(name) {
 
 function checkAmountLands(data) {
   if (data.length > 10) {
-    Notiflix.Notify.info(messageOver);
+    Notiflix.Notify.info(messageOver());
   } else if (data.length > 1 && data.length <= 10) {
     countryList.append(...markupLineCountry(data));
   } else {

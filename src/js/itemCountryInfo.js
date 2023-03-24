@@ -6,7 +6,6 @@ export default function itemCountryInfo(data) {
 
     const newItem = document.createElement('li');
     newItem.append(...markupLineCountry(data));
-
     newItem.classList.add('countryItemSize');
 
     const itemCapital = document.createElement('li');

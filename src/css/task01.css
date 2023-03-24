@@ -1,0 +1,43 @@
+li {
+  list-style-type: none;
+  padding: 10px;
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+}
+
+.countryItemSize {
+  font-size: 32px;
+}
+
+img {
+  margin-left: 0;
+  margin-right: 30px;
+}
+
+img {
+  width: 50px;
+}
+
+.countryItemSize img {
+  width: 100px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+.nameItem {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.contentItem {
+  font-size: 24px;
+}
+
+h4 {
+  margin: 0;
+}
